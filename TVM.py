@@ -47,6 +47,13 @@ def pv_annuity(annuity, interest_rate, time_periods, due=False):
     return annuity * ( (1 - ( 1 / (1 + interest_rate) ** time_periods ) ) / interest_rate)
 
 def payment_annuity(present_value, interest_rate, time_periods):
+    """
+    Computes the size of Annuity Payment
+    Given the present_value
+    The Interest Rate
+    Number of Payment Periods
+    Assuming Future Value of zero
+    """
     fv_factor = (1 + interest_rate)**time_periods
     pv_factor = 1 / fv_factor
     pv_factor_numer = 1 - pv_factor
@@ -55,6 +62,25 @@ def payment_annuity(present_value, interest_rate, time_periods):
     return annuity_payment
 
 def payment_fv_annuity(future_value, interest_rate, time_periods):
+    """
+    Computes the Payment Amount Needed to Acheive a Future Value
+    Given Future Value,
+    Interest Rate,
+    Number of Time Periods
+    Assuming Present Value of Zero
+    """
     from TVM_Beginner import present_value
     pv = present_value(future_value, interest_rate, time_periods)
     return payment_annuity(pv, interest_rate, time_periods)
+
+def growing_annuity(annuity, discount_rate, growth_rate, time_periods):
+    """
+    Computes the Present Value of a Growing Annuity Payment
+    Given the Annuity payment Amount
+    The Discount Rate
+    The Growth Rate
+    Number of Time Periods
+    """
+    net_rate = discount_rate - growth_rate
+    annuity_factor = (1 - ((1.03/1.10)**time_periods))
+    return annuity / net_rate * annuity_factor
