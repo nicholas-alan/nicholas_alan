@@ -84,3 +84,21 @@ def growing_annuity(annuity, discount_rate, growth_rate, time_periods):
     net_rate = discount_rate - growth_rate
     annuity_factor = (1 - ((1.03/1.10)**time_periods))
     return annuity / net_rate * annuity_factor
+
+def perpetuity_pv(annuity, interest_rate, due_date=0):
+    """
+    Returns the Present-Value of a Perpetuity, a level cash-flow paid in perpetuity
+    Given Annuity amount,
+    Interest-Rate
+    Due-Date
+    """
+    if due_date == 0:
+        return annuity / interest_rate
+    else:
+        return present_value( (annuity / interest_rate), interest_rate, due_date-1) 
+
+def ear(apy, compound=12):
+    """Returns Effective Annual Rate given APY
+    Assumes Monthly-Compounding
+    """
+    return ( (1 + apy/compound) ** compound) - 1
