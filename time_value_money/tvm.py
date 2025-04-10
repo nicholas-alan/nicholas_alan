@@ -103,8 +103,8 @@ def ear(apy, compound=12):
     """
     return ( (1 + apy/compound) ** compound) - 1
 
-def irr(cash_flows, discount_rate):
-    """Returns the Internal Rate of Return
+def npv(cash_flows, discount_rate):
+    """Returns the Net Present Value
     Given a series of cash-flows, represented as an array or list.
     Given a Discount Rate in decimalized percent.
     """
