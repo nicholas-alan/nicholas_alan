@@ -98,7 +98,17 @@ def perpetuity_pv(annuity, interest_rate, due_date=0):
         return present_value( (annuity / interest_rate), interest_rate, due_date-1) 
 
 def ear(apy, compound=12):
-    """Returns Effective Annual Rate given APY
+    """Returns Effective Annual Rate given APY in decimalized form (ie. .20 = 20%)
     Assumes Monthly-Compounding
     """
     return ( (1 + apy/compound) ** compound) - 1
+
+def irr(cash_flows, discount_rate):
+    """Returns the Internal Rate of Return
+    Given a series of cash-flows, represented as an array or list.
+    Given a Discount Rate in decimalized percent.
+    """
+    def time_line(cash_flows):
+        return [x for x in range(0, len(cash_flows))]
+    
+    return sum( [present_value(x, discount_rate, y) for x, y in zip(cash_flows, time_line(cash_flows) )] )
